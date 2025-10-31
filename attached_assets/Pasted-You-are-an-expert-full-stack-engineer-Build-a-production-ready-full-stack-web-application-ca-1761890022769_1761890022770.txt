@@ -1,0 +1,83 @@
+You are an expert full-stack engineer.  
+Build a **production-ready full-stack web application** called **QueryToHeal**, a community platform like Reddit or Quora where users can ask and answer health-related questions, including responses from professionals and experts.
+
+---
+
+### 🧠 Core Idea
+"QueryToHeal" is a platform where users can:
+- Register and log in (via username/password or Google Auth)
+- Post health-related questions
+- Reply (nested/threaded) to questions either as anonymous users or logged-in users
+- Read and engage with other users’ answers
+- See an auto-sliding banner on the top of the homepage with interesting health facts
+
+---
+
+### 🏗️ Tech Stack
+- **Framework:** Next.js (latest version, App Router)
+- **Language:** TypeScript
+- **Styling:** Tailwind CSS + shadcn/ui components
+- **Database:** PostgreSQL (via Prisma ORM)
+- **Authentication:** NextAuth.js (Credentials + Google OAuth)
+- **Deployment:** Fully ready for Vercel deployment
+- **State Management:** React Query or Server Actions (where appropriate)
+- **API Handling:** Route Handlers in `/app/api`
+
+---
+
+### 👥 Features & Pages
+
+#### 1. **Authentication**
+- Login with username + password or Google account
+- Register with username, email, date of birth, password
+- Secure password hashing (bcrypt)
+- JWT session management with NextAuth
+- Include protected routes for logged-in users
+
+#### 2. **Home Page (Main Feed)**
+- Shows a **feed of recent queries**
+- Each post shows: title, description, author name (or “Anonymous”), time posted, reply count
+- A **floating “Ask Question” button** opens a modal/form to submit a new query
+- **Auto-slide banner** at the top with rotating “Health Facts” (3–5 sample facts included)
+
+#### 3. **Question Page**
+- Displays the main question details
+- Lists all replies below in nested/threaded format (like Reddit comments)
+- Each reply can be:
+  - from a registered user (show username and avatar)
+  - or anonymous (show “Anonymous User”)
+- Logged-in users can reply or upvote/downvote an answer (optional)
+
+#### 4. **Profile Page**
+- Shows user details (username, email, DOB, join date)
+- Lists all questions and answers posted by that user
+
+#### 5. **Admin or Expert Tagging (optional)**
+- Add a boolean field `isExpert` in User model
+- Expert users’ answers show a small “Expert” badge
+
+---
+
+### 🧩 Database Schema (via Prisma)
+Suggested schema:
+- **User**: id, username, email, passwordHash, dob, isExpert, createdAt
+- **Question**: id, title, description, authorId (FK User), createdAt
+- **Answer**: id, content, questionId (FK Question), authorId (nullable, FK User), parentId (nullable for nested replies), isAnonymous, createdAt
+
+---
+
+### 🧰 Additional Requirements
+- Include `.env.example` file (e.g., DATABASE_URL, NEXTAUTH_SECRET, GOOGLE_CLIENT_ID/SECRET)
+- Include Prisma migration + seed script with sample data
+- Include reusable UI components: `BannerSlider`, `QuestionCard`, `ReplyThread`, `AskQuestionModal`
+- Use Tailwind + shadcn/ui for a clean, modern UI
+- Include README with setup instructions (`npm install`, `npx prisma migrate`, `npm run dev`)
+- Ensure code follows modular structure with comments
+
+---
+
+### ⚙️ Output Format
+1. Complete **file structure** of the project
+2. All **major code files** (frontend & backend logic)
+3. Minimal explanation, focus on **working code**
+4. App must run locally with:
